@@ -1,8 +1,13 @@
 <template>
   <div class="banner-div">
-    <el-carousel height="744px" direction="vertical" :autoplay="true" :interval="18000">
-      <!-- :interval="18000" -->
-      <el-carousel-item v-for="(item,index) in banners" :key="index">
+    <el-carousel
+      height="744px"
+      direction="vertical"
+      :autoplay="true"
+      :interval="8000"
+      ref="carousel"
+    >
+      <el-carousel-item v-for="(item,index) in banners" :key="index" name="index">
         <img :src="item.img" class="banner-img" alt=" " />
       </el-carousel-item>
     </el-carousel>
@@ -23,6 +28,23 @@ export default {
       ]
     };
   },
+  mounted() {
+    // 监听滚轮 滚动事件
+    window.addEventListener("mousewheel", this.handleScroll, false);
+  },
+  methods: {
+    handleScroll(e) {
+      // 页面滚动条距顶部距离
+      let scrollTop = document.documentElement.scrollTop;
+      if (window.location.hash == "#/Home") {
+        if (scrollTop >= 104) {
+          this.$refs.carousel.next();
+        } else {
+          this.$refs.carousel.prev();
+        }
+      }
+    }
+  },
   components: {}
 };
 </script>
@@ -33,7 +55,6 @@ export default {
   height auto
   margin -7.7px 60px 60px 52.3px
   z-index 999999
-  background-color skyblue
 .banner-img
   width 100%
   height 100%

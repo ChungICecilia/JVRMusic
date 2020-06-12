@@ -93,7 +93,6 @@ export default {
   width 100%
   height 100%
   overflow auto
-  background-color skynblue
 .newsItem-title
   margin 0 0 15px 0
   font-size 36px
